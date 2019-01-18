@@ -20,10 +20,11 @@ define bind::zone_file (
       ensure => directory,
     }
   }
-  file { "${zonedir}/${file_name}":
+  file { "${zonedir}${file_name}":
     require => Package[$package_name],
     content => template($template),
     group   => $zonegroup,
     mode    => '0640',
+    notify  => Service["named"]
   }
 }

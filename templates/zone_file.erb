@@ -1,11 +1,11 @@
-$TTL <% if @ttl -%><%= @ttl %><% else -%>1D<% end -%>
+$TTL <% if @ttl -%><%= @ttl %><% else -%>3600<% end -%>
 
-@       IN SOA  <% if @nameserver -%><%= @nameserver %><% else -%>@<% end -%> <% if @admin -%><%= @admin %><% else -%>rname.invalid.<% end -%> (
-                                        <% if @serial -%><%= @serial %><% else -%>0<% end -%>	; serial
-                                        <% if @refresh -%><%= @refresh %><% else -%>1D<% end -%>	; refresh
-                                        <% if @retry -%><%= @retry %><% else -%>1H<% end -%>	; retry
-                                        <% if @expire -%><%= @expire %><% else -%>1W<% end -%>	; expire
-                                        <% if @minimum -%><%= @minimum %><% else -%>3H<% end -%> )	; minimum
+@       IN SOA  <% if @nameserver -%><%= @nameserver %>.<% else -%>@<% end -%> <% if @admin -%><%= @admin %>.<% else -%>root.<% end -%> (
+                                        <% if @serial -%><%= @serial %><% else -%><%= Time.now.to_i %><% end -%>	; serial
+                                        <% if @refresh -%><%= @refresh %><% else -%>1800<% end -%>	; refresh
+                                        <% if @retry -%><%= @retry %><% else -%>3600<% end -%>	; retry
+                                        <% if @expire -%><%= @expire %><% else -%>604800<% end -%>	; expire
+                                        <% if @minimum -%><%= @minimum %><% else -%>300<% end -%> )	; minimum
 <% if !@records.empty? -%>
 <% @records.each do |record| -%>
 <%= record %>

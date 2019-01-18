@@ -47,8 +47,12 @@ class bind (
   $cleaning_interval      = undef,
   $interface_interval     = undef,
   $max_ncache_ttl         = undef,
+  $zone_statistics        = undef,
   $nnotify                = undef,
+  $request_ixfr           = undef,
   $logging                = undef,
+  $statistics_channels    = [],
+  $key                    = [],
   $zone                   = [],
   $include                = [],
 ) inherits ::bind::params {
@@ -57,11 +61,18 @@ class bind (
     require => Package[$package_name],
     backup  => '.backup',
     content => template($template),
+    notify  => Service[$zonegroup],
   }
   if $::osfamily == 'RedHat' {
     service { 'named':
       require => Package[$package_name],
       enable  => true,
+      ensure  => "running",
     }
+  }
+  file { $zonedir:
+    require   => Package[$package_name],
+    mode      => '0770',
+    notify    => Service[$zonegroup]
   }
 }

@@ -1,12 +1,12 @@
 {
-  "name": "aneesh-bind",
-  "version": "6.0.0",
-  "author": "aneesh",
+  "name": "onkeldom-bind",
+  "version": "1.0.0",
+  "author": "OnkelDom",
   "summary": "Puppet module for bind",
   "license": "Apache-2.0",
-  "source": "https://github.com/aneesh-c/puppet-bind",
-  "project_page": "https://github.com/aneesh-c/puppet-bind",
-  "issues_url": "https://github.com/aneesh-c/puppet-bind/issues",
+  "source": "https://github.com/OnkelDom/puppet-bind",
+  "project_page": "https://github.com/OnkelDom/puppet-bind",
+  "issues_url": "https://github.com/OnkelDom/puppet-bind/issues",
   "dependencies": [
   
   ],
