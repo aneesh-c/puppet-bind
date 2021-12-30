@@ -9,25 +9,25 @@ acl <%= key %> {
 <% end -%>
 options {
 <% if @listen_on -%>
-	listen-on <%= @listen_on %>;
+    listen-on <%= @listen_on %>;
 <% end -%>
 <% if @listen_on_v6 -%>
-	listen-on-v6 <%= @listen_on_v6 %>;
+    listen-on-v6 <%= @listen_on_v6 %>;
 <% end -%>
 <% if @directory -%>
-	directory 	<%= @directory %>;
+    directory     <%= @directory %>;
 <% end -%>
 <% if @dump_file -%>
-	dump-file 	<%= @dump_file %>;
+    dump-file     <%= @dump_file %>;
 <% end -%>
 <% if @statistics_file -%>
-	statistics-file <%= @statistics_file %>;
+    statistics-file <%= @statistics_file %>;
 <% end -%>
 <% if @memstatistics_file -%>
-	memstatistics-file <%= @memstatistics_file %>;
+    memstatistics-file <%= @memstatistics_file %>;
 <% end -%>
 <% if @allow_query -%>
-	allow-query     <%= @allow_query %>;
+    allow-query     <%= @allow_query %>;
 <% end -%>
 <% if @allow_update -%>
         allow-update    <%= @allow_update %>;
@@ -39,70 +39,74 @@ options {
         blackhole       <%= @blackhole %>;
 <% end -%>
 
-	/* 
-	 - If you are building an AUTHORITATIVE DNS server, do NOT enable recursion.
-	 - If you are building a RECURSIVE (caching) DNS server, you need to enable 
-	   recursion. 
-	 - If your recursive DNS server has a public IP address, you MUST enable access 
-	   control to limit queries to your legitimate users. Failing to do so will
-	   cause your server to become part of large scale DNS amplification 
-	   attacks. Implementing BCP38 within your network would greatly
-	   reduce such attack surface 
-	*/
+    /*
+     - If you are building an AUTHORITATIVE DNS server, do NOT enable recursion.
+     - If you are building a RECURSIVE (caching) DNS server, you need to enable
+       recursion.
+     - If your recursive DNS server has a public IP address, you MUST enable access
+       control to limit queries to your legitimate users. Failing to do so will
+       cause your server to become part of large scale DNS amplification
+       attacks. Implementing BCP38 within your network would greatly
+       reduce such attack surface
+    */
 <% if @recursion -%>
-	recursion <%= @recursion %>;
+    recursion <%= @recursion %>;
 <% end -%>
 <% if @allow_recursion -%>
-	allow-recursion <%= @allow_recursion %>
+    allow-recursion <%= @allow_recursion %>
 <% end -%>
 
 <% if @dnssec_enable -%>
-	dnssec-enable <%= @dnssec_enable %>;
+    dnssec-enable <%= @dnssec_enable %>;
 <% end -%>
 <% if @dnssec_validation -%>
-	dnssec-validation <%= @dnssec_validation %>;
+    dnssec-validation <%= @dnssec_validation %>;
 <% end -%>
 <% if @bindkeys_file -%>
-	bindkeys-file <%= @bindkeys_file %>;
+    bindkeys-file <%= @bindkeys_file %>;
 <% end -%>
 <% if @managed_keys_directory -%>
-	managed-keys-directory <%= @managed_keys_directory %>;
+    managed-keys-directory <%= @managed_keys_directory %>;
 <% end -%>
 <% if @pid_file -%>
-	pid-file <%= @pid_file %>;
+    pid-file <%= @pid_file %>;
 <% end -%>
 <% if @session_keyfile -%>
-	session-keyfile <%= @session_keyfile %>;
+    session-keyfile <%= @session_keyfile %>;
 <% end -%>
 <% if @auth_nxdomain -%>
-	auth-nxdomain <%= @auth_nxdomain %>;
+    auth-nxdomain <%= @auth_nxdomain %>;
 <% end -%>
 <% if @version -%>
-	version <%= @version %>;
+    version <%= @version %>;
 <% end -%>
 <% if @server_id -%>
-	server-id <%= @server_id %>;
+    server-id <%= @server_id %>;
 <% end -%>
 <% if @cleaning_interval -%>
-	cleaning-interval <%= @cleaning_interval %>;
+    cleaning-interval <%= @cleaning_interval %>;
 <% end -%>
 <% if @interface_interval -%>
-	interface-interval <%= @interface_interval %>;
+    interface-interval <%= @interface_interval %>;
 <% end -%>
 <% if @max_ncache_ttl -%>
-	max-ncache-ttl <%= @max_ncache_ttl %>;
+    max-ncache-ttl <%= @max_ncache_ttl %>;
 <% end -%>
 <% if @nnotify -%>
-	notify <%= @nnotify %>;
+    notify <%= @nnotify %>;
 <% end -%>
 };
 <% if @logging -%>
+<%   if @logging_config -%>
+<%= @logging_config %>
+<%   else -%>
 logging {
         channel default_debug {
                 file "data/named.run";
                 severity dynamic;
         };
 };
+<%   end -%>
 <% end -%>
 <% if !@zone.empty? -%>
 <% @zone.each do |key,value| -%>

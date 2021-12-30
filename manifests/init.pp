@@ -49,6 +49,7 @@ class bind (
   $max_ncache_ttl         = undef,
   $nnotify                = undef,
   $logging                = undef,
+  $logging_config         = undef,
   $zone                   = [],
   $include                = [],
 ) inherits ::bind::params {
