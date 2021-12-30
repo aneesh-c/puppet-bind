@@ -19,9 +19,9 @@
 
 class bind (
   $package_name           = $::bind::params::package_name,
+  $service_name           = $::bind::params::service_name,
   $config_file            = $::bind::params::config_file,
   $template               = 'bind/configfile.erb',
-  $template_local         = $::bind::params::template_local,
   $acl                    = [],
   $listen_on              = undef,
   $listen_on_v6           = undef,
@@ -53,16 +53,16 @@ class bind (
   $zone                   = [],
   $include                = [],
 ) inherits ::bind::params {
-  package { $package_name: ensure => installed }
+  package { $package_name:
+    ensure => installed
+  }
   file { $config_file:
     require => Package[$package_name],
     backup  => '.backup',
     content => template($template),
   }
-  if $::osfamily == 'RedHat' {
-    service { 'named':
-      require => Package[$package_name],
-      enable  => true,
-    }
+  service { $service_name:
+    require => [ Package[$package_name], File[$config_file] ]
+    enable  => true,
   }
 }
