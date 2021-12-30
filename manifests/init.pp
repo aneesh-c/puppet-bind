@@ -57,12 +57,12 @@ class bind (
     ensure => installed
   }
   file { $config_file:
-    require => Package[$package_name],
     backup  => '.backup',
     content => template($template),
+    require => Package[$package_name],
   }
   service { $service_name:
-    require => [ Package[$package_name], File[$config_file] ]
     enable  => true,
+    require => [ Package[$package_name], File[$config_file] ],
   }
 }
