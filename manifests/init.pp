@@ -51,6 +51,7 @@ class bind (
   $server_id              = undef,
   $service_name           = $::bind::params::service_name,
   $statistics_file        = undef,
+  $sysconfig_params       = ['OPTIONS="-4"'],
   $version                = undef,
   $zone                   = [],
   $include                = [],
@@ -67,5 +68,14 @@ class bind (
     enable  => $enable,
     ensure  => $ensure,
     require => [ Package[$package_name], File[$config_file] ],
+  }
+  if $sysconfig_params {
+    $params = join($sysconfig_params, "\n")
+    file { '/etc/sysconfig/named':
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      content => $params
+    }
   }
 }
